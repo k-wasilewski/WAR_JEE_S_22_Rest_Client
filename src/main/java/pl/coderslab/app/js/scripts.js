@@ -9,7 +9,7 @@ $(function a() {
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': 'http://localhost:8282/books/',
+                'url': 'http://localhost:8085/books/list',
                 'dataType': "json",
                 'success': function (data) {
                     jsonGet = data;
@@ -35,14 +35,14 @@ $(function a() {
                 'type': $("#type").val()
             }
             $.ajax({
-                url: 'http://localhost:8282/books/',
+                url: 'http://localhost:8085/books/add',
                 type: 'post',
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 },
-                dataType: 'json',
-                data: JSON.stringify(data),
+                data: 'isbn='+$("#isbn").val()+'&title='+$("#title").val()+'&author='+$("#author").val()+
+                '&publisher='+$("#publisher").val()+'&type='+$("#type").val(),
                 success: function () {
                     location.reload();
                 }
@@ -70,7 +70,7 @@ $(function a() {
 
     var del = function(id) {
         $.ajax({
-            url: "http://localhost:8282/books/" + id,
+            url: "http://localhost:8085/books/del" + id,
             type: "DELETE",
         });
     }
